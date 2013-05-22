@@ -10,10 +10,14 @@ from urllib2 import URLError, urlopen, Request
 def processHTML(rawhtml):
   #Grab System Type
   res = re.search('<title>Product Support for\s(.+)\s\|', rawhtml, re.IGNORECASE)
-  SysType = res.group(1)
-  print SysType
-  return SysType
-
+  try:
+    SysType = res.group(1)
+    print SysType
+    return SysType
+  except:
+    SysType = "Tag not found"
+    return SysType
+    
 #fileI/O
 def readfile(inFile):
   if os.path.isfile(inFile) == False:
